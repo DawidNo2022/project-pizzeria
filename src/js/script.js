@@ -161,13 +161,14 @@
           console.log(optionId, option);
           if (formData[paramId] && formData[paramId].includes(optionId)) {
             // check if the option is not default
-            if (option.default != 'true') {
+            if (option.default !== true) {
+              //zapytac o wyjasnienie czy tak jest ok 10.01.22
               price += option.price;
               // add option price to price variable
             }
           } else {
             // check if the option is default
-            if (option.default == 'true') {
+            if (option.default) {
               // reduce price variable
               price -= option.price;
             }
