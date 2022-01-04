@@ -163,8 +163,9 @@
           const option = param.options[optionId];
           console.log(optionId, option);
           const optionImage = thisProduct.imageWrapper.querySelector(
-            '.' + paramId + '-' + optionId
+            `.${paramId}-${optionId}`
           );
+          console.log('optionImage', optionImage);
           const optionSelected =
             formData[paramId] && formData[paramId].includes(optionId);
           if (optionImage) {
@@ -178,7 +179,7 @@
           }
           if (optionSelected) {
             // check if the option is not default
-            if (option.default !== true) {
+            if (!option.default) {
               //zapytac o wyjasnienie czy tak jest ok 10.01.22
               price += option.price;
               // add option price to price variable
