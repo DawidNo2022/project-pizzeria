@@ -199,7 +199,7 @@
       }
 
       // update calculated price in the HTML
-      price *= thisProduct.AmountWidget.value;
+      price *= thisProduct.AmountWidget.value; //wg instrukcji thisProduct.amountWidget.value
       thisProduct.priceElem.innerHTML = price;
     }
     initAmountWidget() {
@@ -252,16 +252,16 @@
       const thisWidget = this;
       const min = settings.amountWidget.defaultMin;
       const max = settings.amountWidget.defaultMax;
-      const nyValue = parseInt(value); //konwersja do int
+      const newValue = parseInt(value); //konwersja do int
       //ADD validation
       if (
-        thisWidget.value !== nyValue &&
-        !isNaN(nyValue) &&
-        nyValue >= min &&
-        nyValue <= max
+        thisWidget.value !== newValue &&
+        !isNaN(newValue) &&
+        newValue >= min &&
+        newValue <= max
       ) {
         //isNan(nyValue)!==true ???
-        thisWidget.value = nyValue;
+        thisWidget.value = newValue;
         thisWidget.announce();
       }
       thisWidget.input.value = thisWidget.value;
