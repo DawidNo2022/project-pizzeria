@@ -199,12 +199,12 @@
       }
 
       // update calculated price in the HTML
-      price *= thisProduct.AmountWidget.value; //wg instrukcji thisProduct.amountWidget.value
+      price *= thisProduct.amountWidget.value; //wg instrukcji thisProduct.amountWidget.value
       thisProduct.priceElem.innerHTML = price;
     }
     initAmountWidget() {
       const thisProduct = this;
-      thisProduct.AmountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+      thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
       thisProduct.amountWidgetElem.addEventListener('updated', function () {
         thisProduct.processOrder();
       });
