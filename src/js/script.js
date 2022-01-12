@@ -389,12 +389,12 @@
       const thisCart = this;
       const deliveryFee = settings.cart.defaultDeliveryFee;
       thisCart.totalNumber = 0; // calosciowa ilosc sztuk
-      let subtotalPrice = 0; //zsumowana cena bez dostawy
+      thisCart.subtotalPrice = 0; //zsumowana cena bez dostawy
 
       for (let product of thisCart.products) {
         thisCart.totalNumber += product.amount;
         console.log('total number', thisCart.totalNumber);
-        subtotalPrice += +product.price;
+        thisCart.subtotalPrice += +product.price;
       }
       if (thisCart.totalNumber === 0) {
         thisCart.totalPrice = 0;
@@ -409,11 +409,11 @@
         thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
         thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
       } else {
-        thisCart.totalPrice = subtotalPrice + deliveryFee;
+        thisCart.totalPrice = thisCart.subtotalPrice + deliveryFee;
 
         console.log('totalPrice', thisCart.dom.totalPrice);
-        thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
-        console.log('Subtotalprice', subtotalPrice);
+        thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
+        console.log('Subtotalprice', thisCart.subtotalPrice);
         for (let price of thisCart.dom.totalPrice) {
           console.log('Price', price);
           price.innerHTML = thisCart.totalPrice;
@@ -456,6 +456,13 @@
       thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(
         select.cart.totalNumber
       );
+      thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+      thisCart.dom.address = thisCart.dom.wrapper.querySelector(
+        select.cart.address
+      );
+      thisCart.dom.phone = thisCart.dom.wrapper.querySelector(
+        select.cart.phone
+      );
     }
     initActions() {
       const thisCart = this;
@@ -469,6 +476,43 @@
       thisCart.dom.productList.addEventListener('remove', function (event) {
         thisCart.remove(event.detail.cartProduct);
       });
+      thisCart.dom.form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        thisCart.sendOrder();
+      });
+    }
+    sendOrder() {
+      const thisCart = this;
+      const url = settings.db.url + '/' + settings.db.orders;
+
+      const payload = {
+        address: thisCart.dom.address.value,
+        phone: thisCart.dom.phone.value,
+        totalPrice: thisCart.totalPrice,
+        subtotalPrice: thisCart.subtotalPrice,
+        totalNumber: thisCart.totalNumber,
+        deliveryFee: settings.cart.defaultDeliveryFee,
+        products: [],
+      };
+      for (let prod of thisCart.products) {
+        payload.products.push(prod.getData());
+      }
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+      fetch(url, options)
+        .then(function (response) {
+          return response.json;
+        })
+        .then(function (parsedResponse) {
+          console.log('parsed Response', parsedResponse);
+        });
+      console.log('payload', payload);
+      return payload;
     }
     add(menuProduct) {
       const thisCart = this;
@@ -497,6 +541,7 @@
       thisCartProduct.amount = menuProduct.amount;
       thisCartProduct.price = menuProduct.price;
       thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.params = menuProduct.params;
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidgetCart();
       thisCartProduct.initActions();
@@ -554,6 +599,20 @@
       });
       thisCartProduct.dom.wrapper.dispatchEvent(event);
       console.log('Started remove');
+    }
+
+    getData() {
+      const thisCartProduct = this;
+      const product = {
+        id: thisCartProduct.id,
+        amount: thisCartProduct.amount,
+        price: thisCartProduct.price,
+        priceSingle: thisCartProduct.priceSingle,
+        name: thisCartProduct.name,
+        params: thisCartProduct.params,
+      };
+      console.log('Product -getData', product);
+      return product;
     }
     initActions() {
       const thisCartProduct = this;
