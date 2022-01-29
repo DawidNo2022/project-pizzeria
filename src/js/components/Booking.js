@@ -29,7 +29,7 @@ class Booking {
       thisBooking.dom.hoursAmount
     );
     //thisBooking.amountPeopleWidget.addEventListener('click', function () {});
-    thisBooking.hoursAmountWidget.addEventListener('click', function () {});
+    //thisBooking.hoursAmountWidget.addEventListener('click', function () {});
   }
 }
 export default Booking;
