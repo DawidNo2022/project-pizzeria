@@ -252,5 +252,16 @@
       "starters": ["lemonWater"]
     }
   ],
-  "bookings": []
+  "bookings": [
+    {
+      "id": 1,
+      "date": "2022-02-04",
+      "hour": "12:30",
+      "table": 1,
+      "repeat": false,
+      "duration": 4,
+      "ppl": 3,
+      "starters": []
+    }
+  ]
 }
