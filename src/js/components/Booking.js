@@ -24,7 +24,7 @@ class Booking {
     thisBooking.dom.date = document.querySelector(
       select.widgets.datePicker.wrapper
     );
-    thisBooking.dom.time = element.querySelector(
+    thisBooking.dom.time = document.querySelector(
       select.widgets.hourPicker.wrapper
     );
     console.log(thisBooking.dom.time.input);
