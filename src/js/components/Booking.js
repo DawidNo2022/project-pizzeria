@@ -13,6 +13,7 @@ class Booking {
   }
   getData() {
     const thisBooking = this;
+    console.log(thisBooking.datePicker);
     const startDateParam =
       settings.db.dateStartParamKey +
       '=' +
@@ -96,7 +97,7 @@ class Booking {
     thisBooking.hoursAmountWidget = new AmountWidget(
       thisBooking.dom.hoursAmount
     );
-    thisBooking.dateWidget = new DatePicker(thisBooking.dom.date);
+    thisBooking.datePicker = new DatePicker(thisBooking.dom.date);
     thisBooking.timeWidget = new HourPicker(thisBooking.dom.time);
     //thisBooking.amountPeopleWidget.addEventListener('click', function () {});
     //thisBooking.hoursAmountWidget.addEventListener('click', function () {});
