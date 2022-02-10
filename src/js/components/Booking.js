@@ -7,7 +7,7 @@ import HourPicker from './HourPicker.js';
 class Booking {
   constructor(element) {
     const thisBooking = this;
-    thisBooking.selectedTable;
+    thisBooking.selectedTable = -1;
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
@@ -217,14 +217,25 @@ class Booking {
     //thisBooking.hoursAmountWidget.addEventListener('click', function () {});
     thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDOM();
+      thisBooking.removeTableSelection();
     });
     thisBooking.dom.tablesDiv.addEventListener('click', function (event) {
       thisBooking.initTables(event);
     });
-    thisBooking.dom.sendBookingBtn.addEventListener('click', function (event) {
-      event.preventDefault();
+    thisBooking.dom.sendBookingBtn.addEventListener('click', function () {
+      //event.preventDefault();
       thisBooking.sendBooking();
+      thisBooking.removeTableSelection();
+      alert('Your booking is send!');
     });
+  }
+  removeTableSelection() {
+    const thisBooking = this;
+    for (let table of thisBooking.dom.tables) {
+      if (table.classList.contains('selected')) {
+        table.classList.remove('selected');
+      }
+    }
   }
   sendBooking() {
     const thisBooking = this;
@@ -252,18 +263,15 @@ class Booking {
       },
       body: JSON.stringify(payload),
     };
-    fetch(url, options)
-      .then(function (response) {
-        return response.json;
-      })
-      .then(function () {
-        thisBooking.makeBooked(
-          payload.date,
-          payload.hour,
-          payload.duration,
-          payload.table
-        );
-      });
+    fetch(url, options).then(
+      thisBooking.makeBooked(
+        payload.date,
+        payload.hour,
+        payload.duration,
+        payload.table
+      ),
+      thisBooking.updateDOM()
+    );
     console.log('payload', payload);
   }
 }
