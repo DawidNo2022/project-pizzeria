@@ -2,6 +2,7 @@ import { settings, select, classNames } from './settings.js'; //ten sam katalog
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import HomePage from './components/HomePage.js';
 const app = {
   initBooking: function () {
     const thisBooking = this;
@@ -10,6 +11,14 @@ const app = {
     );
     const book = new Booking(thisBooking.bookContainer);
     return book;
+  },
+  initHomePage: function () {
+    const thisHomePage = this;
+    thisHomePage.homeContainer = document.querySelector(
+      select.containerOf.home
+    );
+    const homePage = new HomePage(thisHomePage.homeContainer);
+    return homePage;
   },
   initPages: function () {
     const thisApp = this;
@@ -98,6 +107,7 @@ const app = {
     thisApp.initCart();
     thisApp.initPages();
     thisApp.initBooking();
+    thisApp.initHomePage();
   },
 };
 

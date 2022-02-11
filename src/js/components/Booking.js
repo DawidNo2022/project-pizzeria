@@ -222,11 +222,12 @@ class Booking {
     thisBooking.dom.tablesDiv.addEventListener('click', function (event) {
       thisBooking.initTables(event);
     });
-    thisBooking.dom.sendBookingBtn.addEventListener('click', function () {
-      //event.preventDefault();
+    thisBooking.dom.sendBookingBtn.addEventListener('click', function (event) {
+      event.preventDefault();
       thisBooking.sendBooking();
       thisBooking.removeTableSelection();
       alert('Your booking is send!');
+      thisBooking.initWidgets();
     });
   }
   removeTableSelection() {
@@ -253,7 +254,13 @@ class Booking {
     };
     for (let starter of thisBooking.dom.starters) {
       if (starter.checked) {
-        payload.starters.push(starter.value);
+        console.log(starter.value);
+        if (starter.value == 'bread') {
+          payload.starters.push(starter.value);
+          payload.starters.push('water');
+        } else {
+          payload.starters.push(starter.value);
+        }
       }
     }
     const options = {

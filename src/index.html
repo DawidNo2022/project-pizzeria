@@ -24,6 +24,7 @@
 					<h2 class="logo__subtitle">the best homemade Italian food</h2>
 				</div>
 				<div class="main-nav">
+					<a href="#home">Home</a>
 					<a href="#order">Order</a>
 					<a href="#booking">Booking</a>
 				</div>
@@ -65,6 +66,9 @@
 	</header>
 
 	<div id="pages">
+		<section id="home">
+			<div class="home-wrapper container"></div>
+		</section>
 		<section id="order">
 			<div id="product-list" class="product-list container"></div>
 		</section>
@@ -245,8 +249,36 @@
       </form>
     </div>
   </script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
+	<script id="template-home-widget" type="text/x-handlebars-template">
+		<div class="home-widget">
+			<div class="first-boxes">
+			<div class="order">
+				<div class="box-text">
+			<a href="#order" >
+                <h2>ORDER ONLINE</h2>
+				<p>Delicious food delivered to your door</p>
+				</a>
+				</div>
+				<img class="photo-in-boxes" src="images/homePage/pizza-1.jpg">
+			</div>
+			<div class="order">
+				<div class="box-text">
+			<a href="#book">
+                <h2>BOOK A TABLE</h2>
+				<p>Book your table and enjoy</p>
+				</a>
+				</div>
+				<img class="photo-in-boxes" src="images/homePage/pizza-2.jpg">
+			</div>
+			
+			</div>
+			<div class="open-hours">
+				<h2>OPENING HOURS:</h2>
+				<p>MON-SUN 12PM-11PM</p>
+			</div>
+		</div>
+	</script>
+	<script src=" https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="vendor/range-slider.min.js"></script>
 	<script src="js/app.js" type="module"></script>
