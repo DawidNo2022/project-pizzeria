@@ -38,7 +38,7 @@ const app = {
         event.preventDefault();
         /*get page id from href attribute */
         const id = clickedElemend.getAttribute('href').replace('#', '');
-        /*run thisApp.activatePage with that id */
+        /*run thisApp.activatePage with that id id */
         thisApp.activatePage(id);
         /*change URL hash */
         window.location.hash = '#/' + id;
