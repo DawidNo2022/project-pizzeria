@@ -55,6 +55,9 @@ export const select = {
   nav: {
     links: '.main-nav a',
   },
+  home: {
+    links: '.first-boxes a',
+  },
 
   // CODE ADDED START
   cart: {

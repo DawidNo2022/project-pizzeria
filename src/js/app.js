@@ -13,17 +13,15 @@ const app = {
     return book;
   },
   initHomePage: function () {
-    const thisHomePage = this;
-    thisHomePage.homeContainer = document.querySelector(
-      select.containerOf.home
-    );
-    const homePage = new HomePage(thisHomePage.homeContainer);
-    return homePage;
+    const thisApp = this;
+    thisApp.homeContainer = document.querySelector(select.containerOf.home);
+    thisApp.homePage = new HomePage(thisApp.homeContainer);
   },
   initPages: function () {
     const thisApp = this;
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    thisApp.homeLinks = document.querySelectorAll(select.home.links);
     const idFromHash = window.location.hash.replace('#/', '');
 
     let pageMatchingHash = thisApp.pages[0].id;
