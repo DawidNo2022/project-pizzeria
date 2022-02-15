@@ -133,7 +133,7 @@ export const settings = {
       window.location.hostname +
       (window.location.hostname == 'localhost' ? ':3131' : ''),
     products: 'products',
-    orders: 'order',
+    orders: 'orders',
     bookings: 'bookings',
     events: 'events',
     dateStartParamKey: 'date_gte',
